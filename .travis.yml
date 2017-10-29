@@ -1,0 +1,20 @@
+language: ruby
+rvm:
+- 2.4.1
+env:
+- DB=postgresql
+script:
+- RAILS_ENV=test bundle exec rake --trace db:create
+- RAILS_ENV=test bundle exec rake --trace db:migrate
+- bundle exec rake db:test:prepare
+- bundle exec rspec
+deploy:
+  provider: heroku
+  api_key:
+    secure: IoM23pIrNuvvBs+/xd/PTiOCuS4g1XtXcSa7q4Cua/QgdiViNyNpctY906CSLrurY6J63AZLvxDzpAaj+RwVEHzn1vaviRE3/NFyd1KpcJxbQEbVnv6HbmwadpQGc/IypNbp+wMC3Y3+bmDrQ8RcCckRRHokH+NgiwEt+2y+fljCPugHL4RXQLT4xVf1jz6dfnN+R/vCveUBVEYdRpFPIbo8UYmSTe4kgUBTZosXRuCThIb0oMT+7nONq+iT0zPx7udXGW7wCuMxx+ycqE2K6toStqgLHkmcUq5WKWK4xAJGKKp0/Tcyz1iP4UW+k+dawWRyvs33Q8Mxc9oDdX4T5HPqikHYRLIli8fUhBP12f7+D5oaljBS/XbCtPJUalMuEYAffFBiyfb1Kayra2wHpAtbh4LTiNAOIbchZqCdmavK4kBBVLRJ+azntibbrBWpeShvI6B6uR4FtmAVWx8xD+H6MBdrx402Lc8qTXmnNFjg3pQ7pqWE28ZT8R5KQHY1y8CTR6DhDUDdcjk5xF+gByi5drukz3hOSthAME6W2h8ZzJo3fg9DGNAfIeeuhAXXbwg13vE8z5V6vN+EV9tGrv1YGm8IcU8jFraWRJEVN4QmRLULTtSQv2GpLZXCU7AVk2mWBGvsMA0+FO21hQqw/YICF8/t5QLntwZywQpM9xo=
+  app: http://goldenmarshmallow.herokuapp.com/
+  on:
+    repo: https://github.com/goldenmarshmallow/goldenmarshmallow
+  run:
+  - rake db:migrate
+  - restart
