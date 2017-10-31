@@ -40,3 +40,5 @@ source 'https://rails-assets.org' do
 end
 
 gem 'popper_js', '~> 1.12.3'
+
+gem 'devise'
