@@ -1,1 +1,32 @@
 @import "bootstrap";
+
+.navbar {
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: 200;
+  background: #fff;
+}
+
+.navbar-light a.navbar-brand {
+  font-family: "Helvetica Neue", Helvetica;
+  font-weight: 100;
+  color: #233247;
+
+}
+
+.card{
+  background-color: #fff;
+  border-radius: .25rem;
+  box-shadow: 0 1px solid #e8e8e8;
+  border: 1px solid #e8e8e8;
+  margin-top: 40px;
+  padding: 0
+}
+
+.card p, .card .message{
+  font-size: 18px;
+  margin: 20px;
+}
+
+.card.form{
+  padding: 20px;
+}
