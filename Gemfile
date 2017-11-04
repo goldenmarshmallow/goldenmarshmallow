@@ -14,6 +14,11 @@ gem 'coffee-rails', '~> 4.2'
 gem 'jquery-rails'
 gem 'turbolinks', '~> 5'
 gem 'jbuilder', '~> 2.5'
+gem 'travis'
+gem 'bootstrap', '~> 4.0.0.beta2.1'
+gem 'popper_js', '~> 1.12.3'
+gem 'devise'
+gem 'simple_form'
 
 group :development, :test do
   gem 'byebug', platform: :mri
@@ -28,16 +33,11 @@ end
 
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'rspec-rails', '~> 3.5'
-
-gem 'travis'
-
-gem 'bootstrap', '~> 4.0.0.beta2.1'
+group :development, :test do
+  gem 'rspec-rails', '~> 3.5'
+  gem "factory_bot_rails"
+end
 
 source 'https://rails-assets.org' do
     gem 'rails-assets-tether','>=1.3.3'
 end
-
-gem 'popper_js', '~> 1.12.3'
-
-gem 'devise'
