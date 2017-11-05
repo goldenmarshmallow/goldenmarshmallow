@@ -2,5 +2,5 @@ Rails.application.routes.draw do
   devise_for :users
 
   root 'static_pages#index'
-  resources :games, only: [:new, :create, :show]
+  resources :games, only: %i[new create show]
 end
