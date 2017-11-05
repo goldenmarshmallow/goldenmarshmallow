@@ -18,7 +18,7 @@ Metrics/LineLength:
 Style/Documentation:
   Enabled: false
 
-Naming/FileName:
+Style/FileName:
     Enabled: false
 
 # Disables "Use nested module/class definitions instead of compact style" warning
