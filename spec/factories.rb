@@ -1,6 +1,5 @@
 FactoryBot.define do
   factory :piece do
-    
   end
   factory :user do
     sequence :email do |n|
@@ -12,5 +11,6 @@ FactoryBot.define do
 
   factory :game do
     name 'game1'
+    association :user
   end
 end
