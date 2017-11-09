@@ -1,10 +1,12 @@
 class GamesController < ApplicationController
+  before_action :authenticate_user!, only: %i[new create]
+
   def new
     @game = Game.new
   end
 
   def create
-    @game = Game.create(game_params)
+    @game = current_user.games.create(game_params)
     if @game.valid?
       redirect_to root_path
     else
