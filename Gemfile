@@ -19,10 +19,7 @@ gem 'simple_form'
 gem 'travis'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-
-group :development, :test do
-  gem 'byebug', platform: :mri
-end
+gem 'font-awesome-rails'
 
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -34,6 +31,7 @@ end
 gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
+  gem 'byebug', platform: :mri
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop'

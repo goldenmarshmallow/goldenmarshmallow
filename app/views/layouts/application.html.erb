@@ -7,7 +7,7 @@
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
-
+  
   <body>
     <div id="flex-content-container">
       <nav class="navbar navbar-toggleable-md navbar-inverse bg-inverse">
@@ -17,12 +17,20 @@
 
         <div class="collapse navbar-collapse" id="navbarToggler">
           <%= link_to 'GoldenMarshmallow', root_path, class: 'navbar-brand' %>
+          <ul class="navbar-nav mr-auto mt-2 mt-md-0">
+            <li class="nav-item">
+              <%= link_to new_game_path, class: 'nav-link' do %>
+                <i class="fa fa-plus-circle"></i>
+                New Game
+              <% end %>
+            </li>
+          </ul>
           <ul class="navbar-nav ml-auto">
             <% if user_signed_in? %>
               <li class="nav-item">
                 <%= link_to 'Sign Out', destroy_user_session_path, method: :delete, class: 'nav-link' %>
               </li>
-            <%else%>
+            <% else %>
               <li class="nav-item">
                 <%= link_to 'Sign In', new_user_session_path, class: 'nav-link' %>
               </li>
