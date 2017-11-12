@@ -18,7 +18,7 @@ RSpec.describe GamesController, type: :controller do
 
   describe 'game#create action' do
     it 'should require users to be logged in' do
-      post :create, params: { gram: { message: 'Hello' } }
+      post :create, params: { game: { name: 'Hello' } }
       expect(response).to redirect_to new_user_session_path
     end
 
@@ -27,7 +27,7 @@ RSpec.describe GamesController, type: :controller do
       sign_in user
 
       post :create, params: { game: { name: 'Chess' } }
-      expect(response).to redirect_to root_path
+      expect(response).to redirect_to game_path(Game.last)
 
       game = Game.last
       expect(game.name).to eq('Chess')
@@ -47,12 +47,18 @@ RSpec.describe GamesController, type: :controller do
 
   describe 'game#show action' do
     it 'should successfully show the page if the game is found' do
+      user = FactoryBot.create(:user)
+      sign_in user
       game = FactoryBot.create(:game)
+
       get :show, params: { id: game.id }
       expect(response).to have_http_status(:success)
     end
 
     it 'should return a 404 error if the game is not found' do
+      user = FactoryBot.create(:user)
+      sign_in user
+
       get :show, params: { id: 'BLANK' }
       expect(response).to have_http_status(:not_found)
     end
