@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.describe Game, type: :model do
-  context "When a new game is created" do
+  context 'When a new game is created' do
     it 'will generate all the pieces in their correct positions' do
       game = FactoryBot.create(:game)
 
