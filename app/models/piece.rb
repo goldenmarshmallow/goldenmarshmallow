@@ -11,7 +11,7 @@ class Piece < ApplicationRecord
   end
 
   def exist?(x, y)
-    Piece.where(x_position: x, y_position: y).present?
+    Piece.exists?(x_position: x, y_position: y)
   end
 
   def check_path(x1, y1, x2, y2)
@@ -21,7 +21,7 @@ class Piece < ApplicationRecord
       'vertical'
     else
       # move diagonal
-      @slope = (y2 - y1).to_f / (x2 - x1).to_f
+      (y2 - y1).to_f / (x2 - x1).to_f
     end
   end
 
@@ -67,7 +67,7 @@ class Piece < ApplicationRecord
 
     # Diagonal conditions
     # Diagonal down
-    if @slope.abs == 1.0 && x1 < x2
+    if ((y2 - y1).to_f / (x2 - x1).to_f).abs == 1.0 && x1 < x2
       (x1 + 1).upto(x2 - 1) do |x|
         delta_y = x - x1
         y = y2 > y1 ? y1 + delta_y : y1 - delta_y
@@ -75,7 +75,7 @@ class Piece < ApplicationRecord
       end
     end
     # Diagonal up
-    if @slope.abs == 1.0 && x1 > x2
+    if ((y2 - y1).to_f / (x2 - x1).to_f).abs == 1.0 && x1 > x2
       (x1 - 1).downto(x2 + 1) do |x|
         delta_y = x1 - x
         y = y2 > y1 ? y1 + delta_y : y1 - delta_y
@@ -84,7 +84,7 @@ class Piece < ApplicationRecord
     end
 
     # No straight line
-    return false unless @slope.abs != 1.0
+    return false unless ((y2 - y1).to_f / (x2 - x1).to_f).abs != 1.0
     'Invalid Input'
   end
 
