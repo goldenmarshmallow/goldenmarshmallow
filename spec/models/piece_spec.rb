@@ -2,9 +2,17 @@ require 'rails_helper'
 RSpec.describe Piece, type: :model do
   it 'will check if a piece is obstructed' do
     game = FactoryBot.create(:game)
-    expect(game.pieces.at(3, 1).obstructed?(3, 3)).to eq false
-    expect(game.pieces.at(0, 0).obstructed?(0, 4)).to eq true
-    expect(game.pieces.at(0, 7).obstructed?(2, 7)).to eq true
-    expect(game.pieces.at(1, 0).obstructed?(2, 2)).to eq 'Invalid Input'
+    king = FactoryBot.create(:piece, x_position: 4, y_position: 0, color: :white, type: :king, game: game)
+    expect(king.obstructed?(4, 1)).to eq false
+    rook = FactoryBot.create(:piece, x_position: 0, y_position: 0, color: :white, type: :rook, game: game)
+    expect(rook.obstructed?(5, 0)).to eq true
+    knight = FactoryBot.create(:piece, x_position: 1, y_position: 0, color: :white, type: :knight, game: game)
+    expect(knight.obstructed?(2, 2)).to eq 'Invalid Input'
+    pawn = FactoryBot.create(:piece, x_position: 2, y_position: 1, color: :white, type: :pawn, game: game)
+    expect(pawn.obstructed?(2, 3)).to eq false
+    bishop = FactoryBot.create(:piece, x_position: 2, y_position: 0, color: :white, type: :bishop, game: game)
+    expect(bishop.obstructed?(3, 1)).to eq false
+    queen = FactoryBot.create(:piece, x_position: 3, y_position: 0, color: :white, type: :queen, game: game)
+    expect(queen.obstructed?(3, 3)).to eq false
   end
 end

@@ -2,11 +2,6 @@ class Piece < ApplicationRecord
   belongs_to :game
   validates :color, presence: true
   validates :type, presence: true
-  scope :white, ->() { where(color: 'white') }
-  scope :black, ->() { where(color: 'black') }
-  def self.at(x_position, y_position)
-    Piece.find_by(x_position: x_position, y_position: y_position)
-  end
 
   def exist?(x, y)
     Piece.exists?(x_position: x, y_position: y)
@@ -76,17 +71,5 @@ class Piece < ApplicationRecord
     # No straight line
     return false unless ((y2 - y1).to_f / (x2 - x1).to_f).abs != 1.0
     'Invalid Input'
-  end
-
-  def black?
-    color == 'black'
-  end
-
-  def white?
-    color == 'white'
-  end
-
-  def to_unicode
-    'piece'
   end
 end
