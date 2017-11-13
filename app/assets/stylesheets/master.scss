@@ -30,3 +30,33 @@
 .card.form{
   padding: 20px;
 }
+
+tr, td {
+  border: 1px solid black;
+}
+
+.piece {
+  font-size: 50px;
+  text-align: center;
+}
+
+.chess_table {
+  margin: auto;
+  border: 3px solid black;
+}
+
+.black_space {
+  background-color: brown;
+  height: 80px;
+  width: 80px;
+}
+
+.white_space {
+  background-color: white;
+  height: 80px;
+  width: 80px;
+}
+
+.piece {
+  margin: auto;
+}
