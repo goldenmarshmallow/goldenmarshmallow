@@ -1,7 +1,5 @@
 class Piece < ApplicationRecord
   belongs_to :game
-  validates :color, presence: true
-  validates :type, presence: true
 
   def exist?(x, y)
     Piece.exists?(x_position: x, y_position: y)
