@@ -4,6 +4,6 @@ class Game < ApplicationRecord
   has_many :pieces
 
   def self.available
-    where('game.user.count < 2') if game.user.count > 0
+    where('white_player_id IS NULL OR black_player_id IS NULL')
   end
 end
