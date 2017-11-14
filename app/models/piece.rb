@@ -2,7 +2,7 @@ class Piece < ApplicationRecord
   belongs_to :game
 
   def exist?(x, y)
-    Piece.exists?(x_position: x, y_position: y)
+    game.pieces.exists?(x_position: x, y_position: y)
   end
 
   def check_path(x1, y1, x2, y2)
