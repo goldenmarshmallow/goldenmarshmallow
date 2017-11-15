@@ -1,10 +1,9 @@
 class Game < ApplicationRecord
   validates :name, presence: true
-  after_create :populate_board!
   belongs_to :user
   has_many :pieces
 
-  def populate_board!
+  def populate_board
     (0..7).each do |i|
       Pawn.create(
         game_id: id,

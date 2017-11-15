@@ -6,7 +6,7 @@
     <tr>
       <% 0.upto(7).each do |column_number| %>
         <td class="<%= (row_number + column_number).even? ? "black_space" : "white_space"%>">
-          <% piece = @game.pieces.at(column_number, row_number) %>
+          <% piece = @game.pieces.find_by(x_position: column_number, y_position: row_number) %>
           <% if piece %>
             <p class='piece'><%= piece.to_unicode %></p>
           <% end %>
