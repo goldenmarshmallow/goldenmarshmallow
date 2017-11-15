@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!
 
   def new
     @game = Game.new
@@ -8,7 +8,8 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.create(game_params)
     if @game.valid?
-      redirect_to root_path
+      redirect_to game_path(@game)
+      @game.populate_board
     else
       render :new, status: :unprocessable_entity
     end
