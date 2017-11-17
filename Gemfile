@@ -32,6 +32,7 @@ gem 'tzinfo-data', platforms: %i[mingw mswin x64_mingw jruby]
 
 group :development, :test do
   gem 'byebug', platform: :mri
+  gem 'pry-byebug'
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop'

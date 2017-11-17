@@ -5,10 +5,6 @@ class Piece < ApplicationRecord
 
   scope :white, ->() { where(color: 'white') }
   scope :black, ->() { where(color: 'black') }
-  #
-  # def self.at(x_position, y_position)
-  #   Piece.find_by(x_position: x_position, y_position: y_position)
-  # end
 
   def black?
     color == 'black'
@@ -90,5 +86,15 @@ class Piece < ApplicationRecord
     # No straight line
     return false unless ((y2 - y1).to_f / (x2 - x1).to_f).abs != 1.0
     'Invalid Input'
+  end
+
+  def move_to!(new_x, new_y)
+    if exist?(new_x, new_y)
+      piece_at_destination = game.pieces.find_by(x_position: new_x, y_position: new_y)
+      return 'destination occupied by piece of same color' if color == piece_at_destination.color
+      piece_at_destination.update_attributes(x_position: nil, y_position: nil)
+      true
+    else false
+    end
   end
 end
