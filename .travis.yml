@@ -17,5 +17,5 @@ deploy:
   on:
     repo: https://github.com/goldenmarshmallow/goldenmarshmallow
   run:
-  - rake db:migrate
+  - "rake db:migrate"
   - restart
