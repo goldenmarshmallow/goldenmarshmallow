@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   def index
     @game = Game.available
   end
-  
+
   def new
     @game = Game.new
   end

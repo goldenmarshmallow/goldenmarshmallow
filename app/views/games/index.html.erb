@@ -1,5 +1,9 @@
 <h1>Available Games</h1>
 
 <% @game.each do |game| %>
-  <%= game.present? %>
+  <% if game.present? %>
+    <%= game.name %>
+  <% else %
+    <%= "No games available to join" %>
+  <% end %>
 <% end %>
