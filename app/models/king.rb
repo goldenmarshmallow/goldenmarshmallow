@@ -9,8 +9,6 @@ class King < Piece
     distance_x = (destination_x - origin_x).abs
     distance_y = (destination_y - origin_y).abs
 
-    return true if (0..1).cover?(distance_x) && (0..1).cover?(distance_y)
-
-    false
+    (0..1).cover?(distance_x) && (0..1).cover?(distance_y)
   end
 end
