@@ -93,8 +93,7 @@ class Piece < ApplicationRecord
       piece_at_destination = game.pieces.find_by(x_position: new_x, y_position: new_y)
       return 'destination occupied by piece of same color' if color == piece_at_destination.color
       piece_at_destination.update_attributes(x_position: nil, y_position: nil)
-      true
-    else false
     end
+    update_attributes(x_position: new_x, y_position: new_y)
   end
 end

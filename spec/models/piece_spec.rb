@@ -16,15 +16,22 @@ RSpec.describe Piece, type: :model do
     expect(queen.obstructed?(3, 3)).to eq false
   end
 
-  it 'will move to a new position' do
+  it 'will move to a new position unless same color' do
     game = FactoryBot.create(:game)
     king = FactoryBot.create(:piece, x_position: 4, y_position: 0, color: :white, type: :King, game: game)
-    expect(king.move_to!(3, 0)).to eq false
+    expect(king.move_to!(3, 0)).to eq true
     rook = FactoryBot.create(:piece, x_position: 0, y_position: 0, color: :white, type: :Rook, game: game)
-    expect(rook.move_to!(4, 0)).to eq 'destination occupied by piece of same color'
+    expect(rook.move_to!(3, 0)).to eq 'destination occupied by piece of same color'
+  end
 
+  it 'will move to a new position and capture piece of opposite color' do
+    game = FactoryBot.create(:game)
     queen = FactoryBot.create(:piece, x_position: 3, y_position: 0, color: :white, type: :Queen, game: game)
-    FactoryBot.create(:piece, x_position: 3, y_position: 4, color: :black, type: :Bishop, game: game)
+    bishop = FactoryBot.create(:piece, x_position: 3, y_position: 4, color: :black, type: :Bishop, game: game)
     expect(queen.move_to!(3, 4)).to eq true
+    expect(queen.reload.x_position).to eq 3
+    expect(queen.y_position).to eq 4
+    expect(bishop.reload.x_position).to eq nil
+    expect(bishop.y_position).to eq nil
   end
 end
