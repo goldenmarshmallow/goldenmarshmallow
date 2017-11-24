@@ -7,8 +7,7 @@ class PiecesController < ApplicationController
     @piece = Piece.find(params[:id])
   end
 
-  def update
-  end
+  def update; end
 
   private
 
@@ -18,6 +17,6 @@ class PiecesController < ApplicationController
 
   helper_method :current_game
   def current_game
-    @current_game ||= Game.find(params[:id])
+    @current_game ||= Game.find(params[:game_id])
   end
 end

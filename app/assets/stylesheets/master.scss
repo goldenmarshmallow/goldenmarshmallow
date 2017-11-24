@@ -49,8 +49,12 @@ tr, td {
 }
 
 .piece {
-  font-size: 50px;
+  font-size: 60px;
   text-align: center;
+}
+
+.highlight {
+  color: blue;
 }
 
 .chess_table {
@@ -61,22 +65,30 @@ tr, td {
 
 .black_space {
   background-color: #cab577;
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 100px;
 }
 
 .black_space a {
   color: black;
 }
 
+.black_space a:hover {
+  text-decoration: none;
+}
+
 .white_space {
   background-color: white;
-  height: 80px;
-  width: 80px;
+  height: 100px;
+  width: 100px;
 }
 
 .white_space a {
   color: black;
+}
+
+.white_space a:hover {
+  text-decoration: none;
 }
 
 .piece {
