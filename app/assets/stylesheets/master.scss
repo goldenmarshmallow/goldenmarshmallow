@@ -65,10 +65,18 @@ tr, td {
   width: 80px;
 }
 
+.black_space a {
+  color: black;
+}
+
 .white_space {
   background-color: white;
   height: 80px;
   width: 80px;
+}
+
+.white_space a {
+  color: black;
 }
 
 .piece {

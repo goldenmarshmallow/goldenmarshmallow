@@ -8,7 +8,7 @@
         <td class="<%= (row_number + column_number).even? ? "black_space" : "white_space"%>">
           <% piece = current_game.pieces.find_by(x_position: column_number, y_position: row_number) %>
           <% if piece %>
-            <%= link_to game_piece_path(current_game.pieces) do %>
+            <%= link_to game_piece_path(current_game, piece) do %>
               <p class='piece'><%= piece.to_unicode %></p>
             <% end %>
           <% end %>
