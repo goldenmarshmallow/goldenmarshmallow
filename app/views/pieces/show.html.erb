@@ -7,9 +7,9 @@
       <% 0.upto(7).each do |column_number| %>
         <td class="<%= (row_number + column_number).even? ? "black_space" : "white_space"%>">
           <% piece = current_game.pieces.find_by(x_position: column_number, y_position: row_number) %>
-          <% if current_piece = piece %>
+          <% if piece && current_piece == piece %>
             <p class='piece highlight'><%= piece.to_unicode %></p>
-          <% else %>
+          <% elsif piece %>
             <p class='piece'><%= piece.to_unicode %></p>
           <% end %>
         </td>

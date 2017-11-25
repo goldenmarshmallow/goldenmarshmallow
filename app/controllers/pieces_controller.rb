@@ -19,4 +19,9 @@ class PiecesController < ApplicationController
   def current_game
     @current_game ||= Game.find(params[:game_id])
   end
+
+  helper_method :current_piece
+  def current_piece
+    @current_piece ||= Piece.find(params[:id])
+  end
 end
