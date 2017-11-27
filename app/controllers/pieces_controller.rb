@@ -1,6 +1,6 @@
 class PiecesController < ApplicationController
   before_action :authenticate_user!
-  
+
   def create
     @piece = current_game.pieces.create(piece_params)
   end
