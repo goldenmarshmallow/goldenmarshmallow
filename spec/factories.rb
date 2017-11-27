@@ -13,6 +13,8 @@ FactoryBot.define do
   end
 
   factory :piece do
+    type 'Rook'
+    color :white
     association :game
   end
 

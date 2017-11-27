@@ -1,4 +1,6 @@
 class PiecesController < ApplicationController
+  before_action :authenticate_user!
+  
   def create
     @piece = current_game.pieces.create(piece_params)
   end
@@ -7,7 +9,13 @@ class PiecesController < ApplicationController
     @piece = Piece.find(params[:id])
   end
 
-  def update; end
+  def update
+    row = params[:row]
+    column = params[:column]
+    piece = Piece.find(params[:id])
+    piece.move_to!(column, row)
+    redirect_to game_path(current_game)
+  end
 
   private
 
