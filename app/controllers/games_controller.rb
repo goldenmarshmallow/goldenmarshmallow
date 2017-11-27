@@ -25,4 +25,9 @@ class GamesController < ApplicationController
   def game_params
     params.require(:game).permit(:name)
   end
+
+  helper_method :current_game
+  def current_game
+    @current_game ||= Game.find(params[:id])
+  end
 end
