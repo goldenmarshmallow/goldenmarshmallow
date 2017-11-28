@@ -10,10 +10,8 @@ class PiecesController < ApplicationController
   end
 
   def update
-    row = params[:row]
-    column = params[:column]
     piece = Piece.find(params[:id])
-    piece.move_to!(column, row)
+    piece.move_to!(params[:column], params[:row])
     redirect_to game_path(current_game)
   end
 
