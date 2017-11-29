@@ -1,5 +1,18 @@
 @import "bootstrap";
 
+body {
+  background: image_url('chess_background.jpg') no-repeat center center fixed;
+  -webkit-bakground-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.title {
+  color: #bc5a45;
+  text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
+}
+
 .navbar {
   font-family: "Helvetica Neue", Helvetica;
   font-weight: 200;
@@ -29,4 +42,59 @@
 
 .card.form{
   padding: 20px;
+}
+
+tr, td {
+  border: 1px solid #8b6f47;
+}
+
+.piece {
+  font-size: 60px;
+  text-align: center;
+}
+
+.circle {
+  color: green;
+}
+
+.highlight {
+  color: blue;
+}
+
+.chess_table {
+  margin: auto;
+  border: 3px solid #4f3222;
+  box-shadow: 0px 3px 8px #2a2a2a;
+}
+
+.black_space {
+  background-color: #cab577;
+  height: 100px;
+  width: 100px;
+}
+
+.black_space a {
+  color: black;
+}
+
+.black_space a:hover {
+  text-decoration: none;
+}
+
+.white_space {
+  background-color: white;
+  height: 100px;
+  width: 100px;
+}
+
+.white_space a {
+  color: black;
+}
+
+.white_space a:hover {
+  text-decoration: none;
+}
+
+.piece {
+  margin: auto;
 }

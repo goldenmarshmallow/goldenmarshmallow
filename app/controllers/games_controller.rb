@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :authenticate_user!, only: %i[new create]
+  before_action :authenticate_user!
 
   def index
     @games = Game.available
@@ -12,7 +12,8 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.create(game_params)
     if @game.valid?
-      redirect_to root_path
+      redirect_to game_path(@game)
+      @game.populate_board
     else
       render :new, status: :unprocessable_entity
     end
@@ -27,5 +28,10 @@ class GamesController < ApplicationController
 
   def game_params
     params.require(:game).permit(:name)
+  end
+
+  helper_method :current_game
+  def current_game
+    @current_game ||= Game.find(params[:id])
   end
 end
