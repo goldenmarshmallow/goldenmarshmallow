@@ -37,6 +37,7 @@ group :development, :test do
   gem 'factory_bot_rails'
   gem 'rspec-rails', '~> 3.5'
   gem 'rubocop'
+  gem 'capybara'
 end
 
 source 'https://rails-assets.org' do

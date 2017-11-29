@@ -16,6 +16,16 @@ RSpec.describe GamesController, type: :controller do
     end
   end
 
+  describe 'game#index action' do
+    it 'should successfully display available games' do
+      game = FactoryBot.create(:game)
+      white_player = FactoryBot.create(:user)
+      get :index, params: { name: game.name }
+      expect(white_player).not_to eq nil
+      expect(response).to have_http_status(:success)
+    end
+  end
+
   describe 'game#create action' do
     it 'should require users to be logged in' do
       post :create, params: { gram: { message: 'Hello' } }
