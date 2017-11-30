@@ -21,5 +21,14 @@ RSpec.describe Knight, type: :model do
     expect(knight.valid_move?(4, 0)).to eq false
     expect(knight.valid_move?(2, 1)).to eq true
     expect(knight.valid_move?(2, 2)).to eq false
+    # Moving the Knight out of moving range
+    expect(knight.valid_move?(6, 5)).to eq false
+    expect(knight.valid_move?(6, 4)).to eq false
+    expect(knight.valid_move?(6, 0)).to eq false
+    expect(knight.valid_move?(6, 1)).to eq false
+    expect(knight.valid_move?(0, 5)).to eq false
+    expect(knight.valid_move?(0, 4)).to eq false
+    expect(knight.valid_move?(0, 0)).to eq false
+    expect(knight.valid_move?(0, 1)).to eq false
   end
 end
