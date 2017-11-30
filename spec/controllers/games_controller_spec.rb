@@ -20,6 +20,7 @@ RSpec.describe GamesController, type: :controller do
     it 'should successfully display available games' do
       game = FactoryBot.create(:game)
       white_player = FactoryBot.create(:user)
+      sign_in white_player
       get :index, params: { name: game.name }
       expect(white_player).not_to eq nil
       expect(response).to have_http_status(:success)
