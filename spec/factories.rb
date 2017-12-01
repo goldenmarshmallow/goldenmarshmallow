@@ -29,4 +29,8 @@ FactoryBot.define do
   factory :queen do
     association :game
   end
+
+  factory :pawn do
+    association :game
+  end
 end
