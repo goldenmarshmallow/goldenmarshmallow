@@ -7,7 +7,7 @@ class Knight < Piece
     distance_x = (destination_x - x_position).abs
     distance_y = (destination_y - y_position).abs
 
-    return true if ((distance_x - distance_y).abs == 1) && (distance_x > 0) && (distance_x < 3) && (distance_y > 0) && (distance_y < 3)
+    return true if ( distance_x == 1 && distance_y == 2 ) || ( distance_x == 2 && distance_y == 1 )
     false
   end
 end
