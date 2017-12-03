@@ -30,6 +30,10 @@ FactoryBot.define do
     association :game
   end
 
+  factory :knight do
+    association :game
+  end
+
   factory :pawn do
     association :game
   end
