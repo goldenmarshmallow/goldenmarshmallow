@@ -18,6 +18,10 @@ FactoryBot.define do
     association :game
   end
 
+  factory :rook do
+    association :game
+  end
+
   factory :king do
     association :game
   end
