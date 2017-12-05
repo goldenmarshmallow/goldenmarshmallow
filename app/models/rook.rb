@@ -7,6 +7,6 @@ class Rook < Piece
     distance_x = (destination_x - x_position).abs
     distance_y = (destination_y - y_position).abs
 
-    distance_x == distance_y || distance_x.zero? || distance_y.zero?
+    distance_x.zero? || distance_y.zero?
   end
 end
