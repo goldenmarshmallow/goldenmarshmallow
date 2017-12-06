@@ -24,7 +24,7 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
     return render_not_found if @game.blank?
   end
-  
+
   def update
     @game = Game.find_by(id: params[:id])
     return render_not_found if @game.blank?
