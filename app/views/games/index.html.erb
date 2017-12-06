@@ -1,14 +1,17 @@
-<h1>Available Games</h1>
-
-<table>
-  <% @games.each do |game| %>
-    <% if game.white_player_id != nil %>
-      <tr><%= game.name %></tr>
-      <% if current_user == game.user %>
-          <tr><i class='fa fa-check'></i><p>Already Joined</p></i></tr>
-      <% else %>
-          <tr><%= link_to 'Join Game', game_path(game), class: 'btn btn-success', method: :PATCH %></tr>
-      <% end %>
+<br />
+<div class='frosty col-10 offset-1'>
+  <h1 class='text-center'>Available Games</h1>
+  <br />
+  <table>
+    <% @games.each do |game| %>
+      <% if game.white_player_id != nil %>
+        <tr><%= game.name %></tr>
+        <% if current_user == game.user %>
+            <tr><i class='fa fa-check'></i><p>Already Joined</p></i></tr>
+        <% else %>
+            <tr><%= link_to 'Join Game', game_path(game), class: 'btn btn-success', method: :PATCH %></tr>
+        <% end %>
+      <% end %>  
     <% end %>
-  <% end %>
-</table>
+  </table>
+</div>
