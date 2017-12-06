@@ -6,6 +6,7 @@
 
     <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+    <link rel="icon" href="https://i.imgur.com/cGuUonb.png">
   </head>
 
   <body>
@@ -16,7 +17,10 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarToggler">
-          <%= link_to 'GoldenMarshmallow', root_path, class: 'navbar-brand' %>
+          <%= link_to root_path do %>
+            <%= image_tag "golden-icon-medium.png", class: 'brand-img' %>
+            <p class='navbar-brand'>GoldenMarshmallow</p>
+          <% end %>
           <ul class="navbar-nav mr-auto mt-2 mt-md-0">
             <li class="nav-item">
               <%= link_to new_game_path, class: 'nav-link' do %>
@@ -41,15 +45,45 @@
           </ul>
         </div>
       </nav>
+
+        <% if notice.present? %>
+          <p class="alertalert-info"><%= notice%></p>
+        <% end %>
+        <% if alert.present? %>
+          <p class="alert alert-danger"><%= alert%></p>
+        <% end %>
+
+      <%= yield %>
     </div>
 
-      <% if notice.present? %>
-        <p class="alertalert-info"><%= notice%></p>
-      <% end %>
-      <% if alert.present? %>
-        <p class="alert alert-danger"><%= alert%></p>
-      <% end %>
-
-    <%= yield %>
+    <div id="footer">
+      <div class="container">
+        <div class='row'>
+          <div class='col-12 col-sm-4'>
+            <b>Players</b>
+            <br />
+            <%= link_to 'Game List', games_path %>
+            <br />
+          </div>
+          <div class='col-12 col-sm-4'>
+            <b>About</b>
+            <br />
+            <%= link_to 'Team', team_path %>
+            <br />
+            <%= link_to 'Careers', '#' %>
+            <br />
+            <%= link_to 'Privacy Policy', '#' %>
+          </div>
+          <div class='col-12 col-sm-4 social'>
+            <b>Social</b>
+            <br />
+            <br />
+              <%= link_to 'https://github.com/goldenmarshmallow/goldenmarshmallow' do %>
+                <span class='fa fa-github-square fa-2x social-button'></span>
+              <% end %>
+            </div>
+        </div>
+      </div>
+    </div>
   </body>
 </html>
