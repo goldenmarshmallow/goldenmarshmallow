@@ -96,4 +96,8 @@ class Piece < ApplicationRecord
     end
     update_attributes(x_position: new_x, y_position: new_y)
   end
+
+  def valid_move?(_destination_x, _destination_y)
+    false
+  end
 end

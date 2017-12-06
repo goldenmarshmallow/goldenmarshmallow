@@ -17,8 +17,8 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarToggler">
-          <%= link_to root_path do %>
-            <%= image_tag "golden-icon-medium.png", class: 'brand-img' %>
+          <%= link_to root_path, class: 'brand' do %>
+            <%= image_tag "golden-icon-medium.png", class: 'img-fluid brand-img' %>
             <p class='navbar-brand'>GoldenMarshmallow</p>
           <% end %>
           <ul class="navbar-nav mr-auto mt-2 mt-md-0">
@@ -62,7 +62,7 @@
           <div class='col-12 col-sm-4'>
             <b>Players</b>
             <br />
-            <%= link_to 'Game List', games_path %>
+            <%= link_to 'Available Games', games_path %>
             <br />
           </div>
           <div class='col-12 col-sm-4'>
