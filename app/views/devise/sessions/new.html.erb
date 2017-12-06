@@ -1,8 +1,8 @@
-
-<div class="col-10 mr-auto ml-auto col-sm-8 col-md-6 card form">
-  <div class="mr-auto ml-auto">
-  <h2>Log in</h2>
-
+<br />
+<div class='frosty col-xs-12 col-md-4 offset-md-4'>
+  <br />
+  <h2 class='text-center'>Log in</h2>
+  <br />
   <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
     <div class="field">
       <%= f.label :email %><br />
@@ -20,13 +20,11 @@
         <%= f.label :remember_me %>
       </div>
     <% end -%>
-
+    <br />
     <div class="actions">
-      <%= f.submit "Log in" %>
+      <%= f.submit "Log in", class: 'btn btn-success' %>
     </div>
   <% end %>
-
+  <br />
   <%= render "devise/shared/links" %>
 </div>
-</div>
-

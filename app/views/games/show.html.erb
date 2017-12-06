@@ -1,21 +1,23 @@
 <br />
-<h1 class="text-center title"><%= current_game.name %></h1>
-<br />
-<table class="chess_table">
-  <% 7.downto(0).each do |row_number| %>
-    <tr>
-      <% 0.upto(7).each do |column_number| %>
-        <td class="<%= (row_number + column_number).even? ? "black_space" : "white_space"%>">
-          <% piece = current_game.pieces.find_by(x_position: column_number, y_position: row_number) %>
-          <% if piece %>
-            <%= link_to game_piece_path(current_game, piece) do %>
-              <p class='piece'><%= piece.to_unicode %></p>
+<div class='frosty col-10 offset-1'>
+  <h1 class="text-center"><%= current_game.name %></h1>
+  <br />
+  <table class="chess_table">
+    <% 7.downto(0).each do |row_number| %>
+      <tr>
+        <% 0.upto(7).each do |column_number| %>
+          <td class="<%= (row_number + column_number).even? ? "black_space" : "white_space"%>">
+            <% piece = current_game.pieces.find_by(x_position: column_number, y_position: row_number) %>
+            <% if piece %>
+              <%= link_to game_piece_path(current_game, piece) do %>
+                <p class='piece'><%= piece.to_unicode %></p>
+              <% end %>
             <% end %>
-          <% end %>
-        </td>
-      <% end %>
-    </tr>
-  <% end %>
-</table>
-<br />
-<br />
+          </td>
+        <% end %>
+      </tr>
+    <% end %>
+  </table>
+  <br />
+  <br />
+</div>

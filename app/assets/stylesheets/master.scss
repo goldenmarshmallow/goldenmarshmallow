@@ -1,4 +1,5 @@
 @import "bootstrap";
+@import "font-awesome";
 
 body {
   background: image_url('chess_background2.jpg') no-repeat center center fixed;
@@ -9,32 +10,64 @@ body {
   font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
 }
 
-.title {
-  color: #bc5a45;
+.team-icon {
+  display: block;
+  max-height: 250px;
+  padding: 20px;
+  margin: auto;
+}
+
+.frosty {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
+  background: rgba(255, 255, 255, 0.5);
+  color: white;
+  border: 0.5px solid #ccc;
+  border: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  padding: 10px;
+}
+
+.frosty h1 {
+  font-family: 'intro_rust_gbase_2_line', sans-serif;
+  font-weight: 100;
+  text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
+}
+
+.frosty h2 {
+  font-family: 'intro_rust_gbase_2_line', sans-serif;
+  font-weight: 200;
+  text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
+}
+
+.frosty h3 {
+  font-family: 'intro_rust_gbase_2_line', sans-serif;
+  font-weight: 200;
   text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
 }
 
 .navbar {
-  font-family: "Helvetica Neue", Helvetica;
+  font-family: 'kaushan_scriptregular', sans-serif;
   font-weight: 200;
   background: #fff;
   box-shadow: 0px 1px 3px #2a2a2a;
   position: relative;
+  max-height: 65px;
 }
 
-.navbar-brand {
+.navbar-inverse .navbar-brand {
   font-family: 'intro_rust_gbase_2_line', sans-serif;
   font-size: 30px;
+  margin-top: 15px;
+  color: #fbd38f;
 }
 
-.navbar-light a.navbar-brand {
-  font-family: "Helvetica Neue", Helvetica;
-  font-weight: 100;
-  color: #233247;
+li {
+  margin-top: 20px;
 }
 
 .brand-img {
-  max-height: 40px;
+  max-height: 45px;
 }
 
 .card{
