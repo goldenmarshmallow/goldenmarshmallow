@@ -30,7 +30,7 @@ class GamesController < ApplicationController
     return render_not_found if @game.blank?
     if @game.valid?
       redirect_to game_path(@game)
-      @game.update_attributes(black_player_id: @game.user_id)
+      @game.update_attributes(black_player_id: current_user.id)
     else
       render :index, status: :unprocessable_entity
     end
@@ -39,7 +39,7 @@ class GamesController < ApplicationController
   private
 
   def game_params
-    params.require(:game).permit(:name, :white_player_id, :black_player_id)
+    params.require(:game).permit(:name)
   end
 
   helper_method :current_game
