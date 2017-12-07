@@ -12,8 +12,8 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.create(game_params)
     if @game.valid?
-      redirect_to game_path(@game)
       @game.update_attributes(white_player_id: @game.user_id)
+      redirect_to game_path(@game)
       @game.populate_board
     else
       render :new, status: :unprocessable_entity
@@ -29,8 +29,8 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
     return render_not_found if @game.blank?
     if @game.valid?
-      redirect_to game_path(@game)
       @game.update_attributes(black_player_id: current_user.id)
+      redirect_to game_path(@game)
     else
       render :index, status: :unprocessable_entity
     end
