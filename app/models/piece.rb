@@ -29,7 +29,7 @@ class Piece < ApplicationRecord
       'vertical'
     else
       # move diagonal
-      (y2 - y1).to_f / (x2 - x1).to_f
+      (y2.to_i - y1.to_i).to_f / (x2.to_i - x1.to_i).to_f
     end
   end
 
@@ -42,49 +42,49 @@ class Piece < ApplicationRecord
     # Horizontal condition
     # Horizontal from right to left
     if path == 'horizontal' && x1 < x2
-      (x1 + 1).upto(x2 - 1) do |x|
+      (x1.to_i + 1).upto(x2.to_i - 1) do |x|
         return true if exist?(x, y1)
       end
     end
     # Horizontal from left to right
     if path == 'horizontal' && x1 > x2
-      (x1 - 1).downto(x2 + 1) do |x|
+      (x1.to_i - 1).downto(x2.to_i + 1) do |x|
         return true if exist?(x, y1)
       end
     end
     # Vertical condition
     # Vertical down
     if path == 'vertical' && y1 < y2
-      (y1 + 1).upto(y2 - 1) do |y|
+      (y1.to_i + 1).upto(y2.to_i - 1) do |y|
         return true if exist?(x1, y)
       end
     end
     # Vertical up
     if path == 'vertical' && y1 > y2
-      (y1 - 1).downto(y2 + 1) do |y|
+      (y1.to_i - 1).downto(y2.to_i + 1) do |y|
         return true if exist?(x1, y)
       end
     end
     return false if %w[horizontal vertical].include?(path)
     # Diagonal conditions
     # Diagonal down
-    if ((y2 - y1).to_f / (x2 - x1).to_f).abs == 1.0 && x1 < x2
-      (x1 + 1).upto(x2 - 1) do |x|
-        delta_y = x - x1
-        y = y2 > y1 ? y1 + delta_y : y1 - delta_y
+    if ((y2.to_i - y1.to_i).to_f / (x2.to_i - x1.to_i).to_f).abs == 1.0 && (x1.to_i < x2.to_i)
+      (x1.to_i + 1).upto(x2.to_i - 1) do |x|
+        delta_y = x.to_i - x1.to_i
+        y = y2 > y1 ? y1.to_i + delta_y.to_i : y1.to_i - delta_y.to_i
         return true if exist?(x, y)
       end
     end
     # Diagonal up
-    if ((y2 - y1).to_f / (x2 - x1).to_f).abs == 1.0 && x1 > x2
-      (x1 - 1).downto(x2 + 1) do |x|
-        delta_y = x1 - x
-        y = y2 > y1 ? y1 + delta_y : y1 - delta_y
+    if ((y2.to_i - y1.to_i).to_f / (x2.to_i - x1.to_i).to_f).abs == 1.0 && (x1.to_i > x2.to_i)
+      (x1.to_i - 1).downto(x2.to_i + 1) do |x|
+        delta_y = x1.to_i - x.to_i
+        y = y2.to_i > y1.to_i ? y1.to_i + delta_y.to_i : y1.to_i - delta_y.to_i
         return true if exist?(x, y)
       end
     end
     # No straight line
-    return false unless ((y2 - y1).to_f / (x2 - x1).to_f).abs != 1.0
+    return false unless ((y2.to_i - y1.to_i).to_f / (x2.to_i - x1.to_i).to_f).abs != 1.0
     'Invalid Input'
   end
 
@@ -98,6 +98,6 @@ class Piece < ApplicationRecord
   end
 
   def valid_move?(_destination_x, _destination_y)
-    false
+    true
   end
 end
