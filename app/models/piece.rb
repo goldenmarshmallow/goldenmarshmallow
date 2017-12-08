@@ -98,6 +98,6 @@ class Piece < ApplicationRecord
   end
 
   def valid_move?(_destination_x, _destination_y)
-    true
+    'Valid move'
   end
 end
