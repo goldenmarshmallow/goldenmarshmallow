@@ -4,8 +4,8 @@ class Pawn < Piece
   end
 
   def valid_move?(destination_x, destination_y)
-    distance_x = (destination_x - x_position)
-    distance_y = (destination_y - y_position)
+    distance_x = (destination_x.to_i - x_position.to_i)
+    distance_y = (destination_y.to_i - y_position.to_i)
 
     # white pawn obstructed
     return 'occupied' if white? && distance_x.zero? && distance_y == 1 && game.pieces.find_by(x_position: destination_x, y_position: destination_y)

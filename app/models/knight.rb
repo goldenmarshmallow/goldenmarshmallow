@@ -4,10 +4,10 @@ class Knight < Piece
   end
 
   def valid_move?(destination_x, destination_y)
-    distance_x = (destination_x - x_position).abs
-    distance_y = (destination_y - y_position).abs
+    distance_x = (destination_x.to_i - x_position.to_i).abs
+    distance_y = (destination_y.to_i - y_position.to_i).abs
 
-    return true if (distance_x == 1 && distance_y == 2) || (distance_x == 2 && distance_y == 1)
+    return true if distance_x + distance_y == 3
     false
   end
 end
