@@ -38,7 +38,7 @@ RSpec.describe PiecesController, type: :controller do
       patch :update, params: { game_id: game.id, id: piece.id, piece: { x_position: 5, y_position: 5 } }
       expect(response).to redirect_to game_path(game)
       piece.reload
-      expect(piece.move_to!(5, 5)).to eq true
+      expect(piece.move_to!(5, 4)).to eq true
     end
   end
 end
