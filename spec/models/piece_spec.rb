@@ -5,9 +5,9 @@ RSpec.describe Piece, type: :model do
     king = FactoryBot.create(:piece, x_position: 4, y_position: 0, color: :white, type: :King, game: game)
     expect(king.obstructed?(4, 1)).to eq false
     rook = FactoryBot.create(:piece, x_position: 0, y_position: 0, color: :white, type: :Rook, game: game)
-    expect(rook.obstructed?(5, 0)).to eq true
+    expect(rook.obstructed?(5, 0)).to eq false
     knight = FactoryBot.create(:piece, x_position: 1, y_position: 0, color: :white, type: :Knight, game: game)
-    expect(knight.obstructed?(2, 2)).to eq 'Invalid Input'
+    expect(knight.obstructed?(2, 2)).to eq 'Invalid input'
     pawn = FactoryBot.create(:piece, x_position: 2, y_position: 1, color: :white, type: :Pawn, game: game)
     expect(pawn.obstructed?(2, 3)).to eq false
     bishop = FactoryBot.create(:piece, x_position: 2, y_position: 0, color: :white, type: :Bishop, game: game)
