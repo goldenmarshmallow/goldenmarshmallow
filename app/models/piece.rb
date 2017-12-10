@@ -71,7 +71,7 @@ class Piece < ApplicationRecord
     if ((y2.to_i - y1.to_i).to_f / (x2.to_i - x1.to_i).to_f).abs == 1.0 && (x1.to_i < x2.to_i)
       (x1.to_i + 1).upto(x2.to_i - 1) do |x|
         delta_y = x.to_i - x1.to_i
-        y = y2 > y1 ? y1.to_i + delta_y.to_i : y1.to_i - delta_y.to_i
+        y = y2.to_i > y1.to_i ? (y1.to_i + delta_y.to_i) : (y1.to_i - delta_y.to_i)
         return true if exist?(x, y)
       end
     end
@@ -79,7 +79,7 @@ class Piece < ApplicationRecord
     if ((y2.to_i - y1.to_i).to_f / (x2.to_i - x1.to_i).to_f).abs == 1.0 && (x1.to_i > x2.to_i)
       (x1.to_i - 1).downto(x2.to_i + 1) do |x|
         delta_y = x1.to_i - x.to_i
-        y = y2.to_i > y1.to_i ? y1.to_i + delta_y.to_i : y1.to_i - delta_y.to_i
+        y = y2.to_i > y1.to_i ? (y1.to_i + delta_y.to_i) : (y1.to_i - delta_y.to_i)
         return true if exist?(x, y)
       end
     end

@@ -27,5 +27,14 @@ RSpec.describe Game, type: :model do
       queen.reload
       expect(game.check?).to eq true
     end
+
+    it 'will not show the game is in check if the King is not at the opponent\'s destination' do
+      game = FactoryBot.create(:game)
+      king = FactoryBot.create(:piece, x_position: 4, y_position: 4, color: :white, type: :King, game: game)
+      queen = FactoryBot.create(:piece, x_position: 1, y_position: 3, color: :black, type: :Queen, game: game)
+      queen.move_to!(0, 2)
+      queen.reload
+      expect(game.check?).to eq false
+    end
   end
 end

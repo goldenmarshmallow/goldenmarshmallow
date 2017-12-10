@@ -1,19 +1,55 @@
 require 'rails_helper'
 RSpec.describe Piece, type: :model do
-  it 'will check if a piece is obstructed' do
-    game = FactoryBot.create(:game)
-    king = FactoryBot.create(:piece, x_position: 4, y_position: 0, color: :white, type: :King, game: game)
-    expect(king.obstructed?(4, 1)).to eq false
-    rook = FactoryBot.create(:piece, x_position: 0, y_position: 0, color: :white, type: :Rook, game: game)
-    expect(rook.obstructed?(5, 0)).to eq false
-    knight = FactoryBot.create(:piece, x_position: 1, y_position: 0, color: :white, type: :Knight, game: game)
-    expect(knight.obstructed?(2, 2)).to eq 'Invalid input'
-    pawn = FactoryBot.create(:piece, x_position: 2, y_position: 1, color: :white, type: :Pawn, game: game)
-    expect(pawn.obstructed?(2, 3)).to eq false
-    bishop = FactoryBot.create(:piece, x_position: 2, y_position: 0, color: :white, type: :Bishop, game: game)
-    expect(bishop.obstructed?(3, 1)).to eq false
-    queen = FactoryBot.create(:piece, x_position: 3, y_position: 0, color: :white, type: :Queen, game: game)
-    expect(queen.obstructed?(3, 3)).to eq false
+  context 'pieces.obstructed? method' do
+    it 'will check if a piece is horizontally obstructed' do
+      game = FactoryBot.create(:game)
+      rook = FactoryBot.create(:piece, x_position: 3, y_position: 3, color: :white, type: :Rook, game: game)
+      pawn = FactoryBot.create(:piece, x_position: 5, y_position: 3, color: :white, type: :Pawn, game: game)
+      expect(rook.obstructed?(6, 3)).to eq true
+      expect(rook.obstructed?(1, 3)).to eq false
+
+      knight = FactoryBot.create(:piece, x_position: 5, y_position: 5, color: :black, type: :Knight, game: game)
+      queen = FactoryBot.create(:piece, x_position: 6, y_position: 5, color: :black, type: :Queen, game: game)
+      expect(queen.obstructed?(4, 5)).to eq true
+      expect(queen.obstructed?(7, 5)).to eq false
+    end
+
+    it 'will check if a piece is vertically obstructed' do
+      game = FactoryBot.create(:game)
+      rook = FactoryBot.create(:piece, x_position: 3, y_position: 3, color: :white, type: :Rook, game: game)
+      pawn = FactoryBot.create(:piece, x_position: 3, y_position: 4, color: :white, type: :Pawn, game: game)
+      expect(rook.obstructed?(3, 5)).to eq true
+      expect(rook.obstructed?(3, 0)).to eq false
+
+      knight = FactoryBot.create(:piece, x_position: 5, y_position: 5, color: :black, type: :Knight, game: game)
+      queen = FactoryBot.create(:piece, x_position: 5, y_position: 6, color: :black, type: :Queen, game: game)
+      expect(queen.obstructed?(5, 1)).to eq true
+      expect(queen.obstructed?(5, 7)).to eq false
+    end
+
+    it 'will check if a piece is diagonally obstructed' do
+      game = FactoryBot.create(:game)
+      pawn = FactoryBot.create(:piece, x_position: 3, y_position: 3, color: :white, type: :Pawn, game: game)
+      bishop = FactoryBot.create(:piece, x_position: 2, y_position: 2, color: :white, type: :Bishop, game: game)
+      expect(bishop.obstructed?(5, 5)).to eq true
+      expect(bishop.obstructed?(0, 0)).to eq false
+
+      knight = FactoryBot.create(:piece, x_position: 5, y_position: 4, color: :black, type: :Knight, game: game)
+      queen = FactoryBot.create(:piece, x_position: 6, y_position: 5, color: :black, type: :Queen, game: game)
+      expect(queen.obstructed?(7, 6)).to eq false
+      expect(queen.obstructed?(2, 1)).to eq true
+    end
+
+    it 'will return invalid if a piece is not moving horizontally, vertically, or diagonally' do
+      game = FactoryBot.create(:game)
+      knight = FactoryBot.create(:piece, x_position: 3, y_position: 3, color: :white, type: :Knight, game: game)
+      pawn = FactoryBot.create(:piece, x_position: 3, y_position: 4, color: :white, type: :Pawn, game: game)
+      rook = FactoryBot.create(:piece, x_position: 3, y_position: 2, color: :white, type: :Rook, game: game)
+      expect(knight.obstructed?(5, 4)).to eq 'Invalid Input'
+      expect(knight.obstructed?(1, 4)).to eq 'Invalid Input'
+      expect(knight.obstructed?(5, 2)).to eq 'Invalid Input'
+      expect(knight.obstructed?(1, 2)).to eq 'Invalid Input'
+    end
   end
 
   it 'will move to a new position unless same color' do
