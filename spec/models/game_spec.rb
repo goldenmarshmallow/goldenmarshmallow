@@ -25,6 +25,7 @@ RSpec.describe Game, type: :model do
       queen = FactoryBot.create(:piece, x_position: 1, y_position: 3, color: :black, type: :Queen, game: game)
       queen.move_to!(2, 4)
       queen.reload
+      king.reload
       expect(game.check?).to eq true
     end
 
@@ -34,6 +35,7 @@ RSpec.describe Game, type: :model do
       queen = FactoryBot.create(:piece, x_position: 1, y_position: 3, color: :black, type: :Queen, game: game)
       queen.move_to!(0, 2)
       queen.reload
+      king.reload
       expect(game.check?).to eq false
     end
   end
