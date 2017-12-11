@@ -11,8 +11,8 @@ class PiecesController < ApplicationController
 
   def update
     @piece = Piece.find(params[:id])
-    if @piece.valid_move?(params[:column], params[:row])
-      @piece.move_to!(params[:column], params[:row])
+    if @piece.valid_move?(piece_params[:column], piece_params[:row])
+      @piece.move_to!(piece_params[:column], piece_params[:row])
       redirect_to game_path(current_game)
     else
       redirect_to game_path(current_game), alert: 'Invalid move!'
@@ -22,7 +22,7 @@ class PiecesController < ApplicationController
   private
 
   def piece_params
-    params.require(:piece).permit(:type)
+    params.permit(:column, :row, :type)
   end
 
   helper_method :current_game

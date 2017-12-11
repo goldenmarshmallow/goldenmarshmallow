@@ -4,13 +4,12 @@ class King < Piece
   end
 
   def valid_move?(destination_x, destination_y)
-    origin_x = x_position
-    origin_y = y_position
-    distance_x = (destination_x.to_i - origin_x.to_i).abs
-    distance_y = (destination_y.to_i - origin_y.to_i).abs
-
-    return false if obstructed?(destination_x, destination_y)
-    return true if (0..1).cover?(distance_x) && (0..1).cover?(distance_y)
+    distance_x = (destination_x.to_i - x_position.to_i).abs
+    distance_y = (destination_y.to_i - y_position.to_i).abs
+    return false if horizontal_obstruction?(destination_x, destination_y)
+    return false if vertical_obstruction?(destination_x, destination_y)
+    return false if diagonal_obstruction?(destination_x, destination_y)
+    return true if (distance_x <= 1) && (distance_y <= 1)
     false
   end
 end

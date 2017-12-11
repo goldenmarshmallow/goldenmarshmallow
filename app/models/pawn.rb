@@ -7,12 +7,12 @@ class Pawn < Piece
     distance_x = (destination_x.to_i - x_position.to_i)
     distance_y = (destination_y.to_i - y_position.to_i)
 
-    return false if obstructed?(destination_x, destination_y)
+    return false if vertical_obstruction?(destination_x, destination_y)
     # white pawn obstructed
-    return 'occupied' if white? && distance_x.zero? && distance_y == 1 && game.pieces.find_by(x_position: destination_x, y_position: destination_y)
+    return false if white? && distance_x.zero? && distance_y == 1 && game.pieces.find_by(x_position: destination_x, y_position: destination_y)
 
     # black pawn obstructed
-    return 'occupied' if black? && distance_x.zero? && distance_y == -1 && game.pieces.find_by(x_position: destination_x, y_position: destination_y)
+    return false if black? && distance_x.zero? && distance_y == -1 && game.pieces.find_by(x_position: destination_x, y_position: destination_y)
 
     # white pawn first move
     return true if white? && y_position == 1 && (0..2).cover?(distance_y) && distance_x.zero?
