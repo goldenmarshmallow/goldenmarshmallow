@@ -22,16 +22,16 @@ class Piece < ApplicationRecord
     game.pieces.exists?(x_position: x, y_position: y)
   end
 
-  def check_path(x1, y1, x2, y2)
-    if y1 == y2
-      'horizontal'
-    elsif x1 == x2
-      'vertical'
-    else
-      # move diagonal
-      (y2.to_i - y1.to_i).to_f / (x2.to_i - x1.to_i).to_f
-    end
-  end
+  # def check_path(x1, y1, x2, y2)
+  #   if y1 == y2
+  #     'horizontal'
+  #   elsif x1 == x2
+  #     'vertical'
+  #   else
+  #     # move diagonal
+  #     (y2.to_i - y1.to_i).to_f / (x2.to_i - x1.to_i).to_f
+  #   end
+  # end
 
   # def obstructed?(destination_x, destination_y)
   #   x1 = x_position
@@ -101,12 +101,15 @@ class Piece < ApplicationRecord
   end
 
   def vertical_obstruction?(_destination_x, destination_y)
+    byebug
     range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
+    byebug
     game.pieces.where(
       color: color,
       x_position: x_position,
       y_position: range
     ).where.not(id: id).any?
+    byebug
   end
 
   def horizontal_obstruction?(destination_x, _destination_y)
@@ -119,22 +122,26 @@ class Piece < ApplicationRecord
   end
 
   def diagonal_obstruction?(destination_x, destination_y)
+    byebug
     x_range = x_position.to_i < destination_x.to_i ? ((x_position.to_i)...(destination_x.to_i)) : ((destination_x.to_i)...(x_position.to_i))
     y_range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
+    byebug
     x_array = x_range.first(x_range.size)
     y_array = y_range.first(y_range.size)
-
+    byebug
     coordinates = x_array.each_with_index.map do |x, index|
       { x: x, y: y_array[index] }
     end
-
+    byebug
     obstructions = coordinates.select do |coordinate|
       game.pieces.where(
         color: color,
         x_position: coordinate[:x],
         y_position: coordinate[:y]
       ).where.not(id: id).any?
+      byebug
     end
+    byebug
     obstructions.any?
   end
 
