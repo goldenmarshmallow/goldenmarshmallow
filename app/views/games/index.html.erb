@@ -2,7 +2,7 @@
 
 <table>
   <% @games.each do |game| %>
-    <% if game.white_player_id != nil %>
+    <% if game.white_player_id != nil%>
       <tr><%= game.name %></tr>
       <% if current_user == game.user %>
           <tr><i class='fa fa-check'></i><p>Already Joined</p></i></tr>

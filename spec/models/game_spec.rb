@@ -17,4 +17,22 @@ RSpec.describe Game, type: :model do
       expect(game.pieces.find_by(x_position: 2, y_position: 0).type).to eq 'Bishop'
     end
   end
+
+  it 'will declare black player as a winner if the white player forfeits' do
+    white_player = FactoryBot.create(:user)
+    black_player = FactoryBot.create(:user)
+    game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
+    game.forfeit(white_player)
+    game.update_attributes(winner_id: black_player.id)
+    expect(game.winner_id).to eq black_player.id
+  end
+
+  it 'will declare white player as a winner if the black player forfeits' do
+    white_player = FactoryBot.create(:user)
+    black_player = FactoryBot.create(:user)
+    game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
+    game.forfeit(black_player)
+    game.update_attributes(winner_id: white_player.id)
+    expect(game.winner_id).to eq white_player.id
+  end
 end

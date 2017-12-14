@@ -2,6 +2,9 @@ class Game < ApplicationRecord
   validates :name, presence: true
   belongs_to :user
   has_many :pieces
+  belongs_to :white_player, class_name: 'User', optional: true
+  belongs_to :black_player, class_name: 'User', optional: true
+  belongs_to :winner, class_name: 'User', optional: true
 
   def populate_board
     (0..7).each do |i|
@@ -50,5 +53,11 @@ class Game < ApplicationRecord
 
   def self.available
     where('white_player_id IS NULL OR black_player_id IS NULL')
+  end
+
+  def forfeit(current_user)
+    update_attributes(winner_id: white_player_id, result: 'Forfeit', black_player_id: nil) if current_user.id == black_player_id
+
+    update_attributes(winner_id: black_player_id, result: 'Forfeit', white_player_id: nil) if current_user.id == white_player_id
   end
 end
