@@ -82,7 +82,7 @@ RSpec.describe GamesController, type: :controller do
       sign_in white
       game = FactoryBot.create(:game)
       game.update_attributes(white_player_id: white.id, black_player_id: black.id)
-      put :forfeit, params: { id: game.id}
+      put :forfeit, params: { id: game.id }
 
       expect(response).to redirect_to(games_path)
     end
