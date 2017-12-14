@@ -3,7 +3,7 @@ Rails.application.routes.draw do
 
   root 'static_pages#index'
   resources :games, only: %i[new create show index update] do
-    post 'forfeit', on: :member
+    put 'forfeit', on: :member
     resources :pieces, only: %i[create show update]
   end
 end
