@@ -56,8 +56,9 @@ class Game < ApplicationRecord
   end
 
   def forfeit(current_user)
-    update_attributes(winner_id: white_player_id, result: 'Forfeit') if current_user.id == black_player_id
 
-    update_attributes(winner_id: black_player_id, result: 'Forfeit') if current_user.id == white_player_id
+    update_attributes(winner_id: white_player_id, result: 'Forfeit', black_player_id: nil) if current_user.id == black_player_id
+
+    update_attributes(winner_id: black_player_id, result: 'Forfeit', white_player_id: nil) if current_user.id == white_player_id
   end
 end

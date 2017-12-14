@@ -45,11 +45,6 @@ class GamesController < ApplicationController
 
   private
 
-  def black_player?
-    return false if @game.white_player_id == current_user.id
-    @game.update_attributes(black_player_id: current_user.id)
-  end
-
   def game_params
     params.require(:game).permit(:name)
   end
