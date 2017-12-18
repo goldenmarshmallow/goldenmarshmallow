@@ -89,61 +89,80 @@ class Piece < ApplicationRecord
   # end
 
   def obstructed?(destination_x, destination_y)
-    if destination_x == x_position
-      vertical_obstruction?(destination_x, destination_y)
-    elsif destination_y == y_position
-      horizontal_obstruction?(destination_x, destination_y)
-    elsif (destination_x.to_i - x_position.to_i).abs == (destination_y.to_i - y_position.to_i).abs
-      diagonal_obstruction?(destination_x, destination_y)
+    if (destination_x.to_i - x_position.to_i).abs == (destination_y.to_i - y_position.to_i).abs
+      x_range = x_position.to_i < destination_x.to_i ? ((x_position.to_i)...(destination_x.to_i)) : ((destination_x.to_i)...(x_position.to_i))
+      y_range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
+      x_array = x_range.first(x_range.size)
+      y_array = y_range.first(y_range.size)
+
+      coordinates = x_array.each_with_index.map do |x, index|
+        { x: x, y: y_array[index] }
+      end
+
+      obstructions = coordinates.select do |coordinate|
+        game.pieces.where(
+          color: color,
+          x_position: coordinate[:x],
+          y_position: coordinate[:y]
+        ).where.not(id: id).any?
+      end
+      obstructions.any?
+    elsif destination_y.to_i == y_position.to_i
+      range = x_position.to_i < destination_x.to_i ? ((x_position.to_i)...(destination_x.to_i)) : ((destination_x.to_i)...(x_position.to_i))
+      game.pieces.where(
+        color: color,
+        x_position: range,
+        y_position: y_position
+      ).where.not(id: id).any?
+    elsif destination_x.to_i == x_position.to_i
+      range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
+      game.pieces.where(
+        color: color,
+        x_position: x_position,
+        y_position: range
+      ).where.not(id: id).any?
     else
       'Invalid Input'
     end
   end
 
-  def vertical_obstruction?(_destination_x, destination_y)
-    byebug
-    range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
-    byebug
-    game.pieces.where(
-      color: color,
-      x_position: x_position,
-      y_position: range
-    ).where.not(id: id).any?
-    byebug
-  end
-
-  def horizontal_obstruction?(destination_x, _destination_y)
-    range = x_position.to_i < destination_x.to_i ? ((x_position.to_i)...(destination_x.to_i)) : ((destination_x.to_i)...(x_position.to_i))
-    game.pieces.where(
-      color: color,
-      x_position: range,
-      y_position: y_position
-    ).where.not(id: id).any?
-  end
-
-  def diagonal_obstruction?(destination_x, destination_y)
-    byebug
-    x_range = x_position.to_i < destination_x.to_i ? ((x_position.to_i)...(destination_x.to_i)) : ((destination_x.to_i)...(x_position.to_i))
-    y_range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
-    byebug
-    x_array = x_range.first(x_range.size)
-    y_array = y_range.first(y_range.size)
-    byebug
-    coordinates = x_array.each_with_index.map do |x, index|
-      { x: x, y: y_array[index] }
-    end
-    byebug
-    obstructions = coordinates.select do |coordinate|
-      game.pieces.where(
-        color: color,
-        x_position: coordinate[:x],
-        y_position: coordinate[:y]
-      ).where.not(id: id).any?
-      byebug
-    end
-    byebug
-    obstructions.any?
-  end
+  # def vertical_obstruction?(_destination_x, destination_y)
+  #   range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
+  #   game.pieces.where(
+  #     color: color,
+  #     x_position: x_position,
+  #     y_position: range
+  #   ).where.not(id: id).any?
+  # end
+  #
+  # def horizontal_obstruction?(destination_x, _destination_y)
+  #   range = x_position.to_i < destination_x.to_i ? ((x_position.to_i)...(destination_x.to_i)) : ((destination_x.to_i)...(x_position.to_i))
+  #   game.pieces.where(
+  #     color: color,
+  #     x_position: range,
+  #     y_position: y_position
+  #   ).where.not(id: id).any?
+  # end
+  #
+  # def diagonal_obstruction?(destination_x, destination_y)
+  #   x_range = x_position.to_i < destination_x.to_i ? ((x_position.to_i)...(destination_x.to_i)) : ((destination_x.to_i)...(x_position.to_i))
+  #   y_range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
+  #   x_array = x_range.first(x_range.size)
+  #   y_array = y_range.first(y_range.size)
+  #
+  #   coordinates = x_array.each_with_index.map do |x, index|
+  #     { x: x, y: y_array[index] }
+  #   end
+  #
+  #   obstructions = coordinates.select do |coordinate|
+  #     game.pieces.where(
+  #       color: color,
+  #       x_position: coordinate[:x],
+  #       y_position: coordinate[:y]
+  #     ).where.not(id: id).any?
+  #   end
+  #   obstructions.any?
+  # end
 
   def move_to!(new_x, new_y)
     if exist?(new_x, new_y)

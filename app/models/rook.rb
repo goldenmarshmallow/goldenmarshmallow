@@ -7,7 +7,7 @@ class Rook < Piece
     distance_x = (destination_x.to_i - x_position.to_i).abs
     distance_y = (destination_y.to_i - y_position.to_i).abs
 
-    return false if horizontal_obstruction?(destination_x, destination_y) || vertical_obstruction?(destination_x, destination_y)
+    return false if obstructed?(destination_x, destination_y)
     return true if (distance_x > 0 && distance_y.zero?) || (distance_x.zero? && distance_y > 0)
     false
   end
