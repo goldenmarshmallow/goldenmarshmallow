@@ -17,4 +17,26 @@ RSpec.describe Game, type: :model do
       expect(game.pieces.find_by(x_position: 2, y_position: 0).type).to eq 'Bishop'
     end
   end
+
+  context 'Check if a game has a check status' do
+    it 'will correctly show the game is in check if the King is at the opponent\'s destination' do
+      game = FactoryBot.create(:game)
+      king = FactoryBot.create(:piece, x_position: 4, y_position: 4, color: :white, type: :King, game: game)
+      queen = FactoryBot.create(:piece, x_position: 1, y_position: 3, color: :black, type: :Queen, game: game)
+      queen.move_to!(2, 4)
+      queen.reload
+      king.reload
+      expect(game.check?).to eq true
+    end
+
+    it 'will not show the game is in check if the King is not at the opponent\'s destination' do
+      game = FactoryBot.create(:game)
+      king = FactoryBot.create(:piece, x_position: 4, y_position: 4, color: :white, type: :King, game: game)
+      queen = FactoryBot.create(:piece, x_position: 1, y_position: 3, color: :black, type: :Queen, game: game)
+      queen.move_to!(0, 2)
+      queen.reload
+      king.reload
+      expect(game.check?).to eq false
+    end
+  end
 end
