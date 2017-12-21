@@ -90,10 +90,12 @@ class Piece < ApplicationRecord
 
   def obstructed?(destination_x, destination_y)
     if (destination_x.to_i - x_position.to_i).abs == (destination_y.to_i - y_position.to_i).abs
-      x_range = x_position.to_i < destination_x.to_i ? ((x_position.to_i)...(destination_x.to_i)) : ((destination_x.to_i)...(x_position.to_i))
-      y_range = y_position.to_i < destination_y.to_i ? ((y_position.to_i)...(destination_y.to_i)) : ((destination_y.to_i)...(y_position.to_i))
-      x_array = x_range.first(x_range.size)
-      y_array = y_range.first(y_range.size)
+      flipped_x = x_position.to_i < destination_x.to_i
+      flipped_y = y_position.to_i < destination_y.to_i
+      x_range = flipped_x ? ((x_position.to_i)..(destination_x.to_i)) : ((destination_x.to_i)..(x_position.to_i))
+      y_range = flipped_y ? ((y_position.to_i)..(destination_y.to_i)) : ((destination_y.to_i)..(y_position.to_i))
+      x_array = flipped_x ? x_range.first(x_range.size).reverse : x_range.first(x_range.size)
+      y_array = flipped_y ? y_range.first(y_range.size).reverse : y_range.first(y_range.size)
 
       coordinates = x_array.each_with_index.map do |x, index|
         { x: x, y: y_array[index] }
