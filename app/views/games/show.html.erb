@@ -13,11 +13,23 @@
                 <p class='piece'><%= piece.to_unicode %></p>
               <% end %>
             <% end %>
-          </td>
-        <% end %>
-      </tr>
-    <% end %>
+          <% end %>
+        </td>
+      <% end %>
+    </tr>
   </table>
-  <br />
-  <br />
+<br />
+<br />
 </div>
+<table>
+  <tr>
+    <th>Avatar</th>
+    <th>Email</th>
+  </tr>
+  <% for user in @users %>
+    <tr>
+      <td><%= image_tag user.gravatar_url %></td>
+      <td><% user.email %></td>
+    </tr>
+  <% end %>
+</table>
