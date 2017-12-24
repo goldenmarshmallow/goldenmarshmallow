@@ -4,11 +4,10 @@ class Bishop < Piece
   end
 
   def valid_move?(destination_x, destination_y)
-    origin_x = x_position
-    origin_y = y_position
-    distance_x = (destination_x - origin_x).abs
-    distance_y = (destination_y - origin_y).abs
-
-    distance_x == distance_y
+    distance_x = (destination_x.to_i - x_position.to_i).abs
+    distance_y = (destination_y.to_i - y_position.to_i).abs
+    return false if obstructed?(destination_x, destination_y)
+    return true if distance_x.to_i == distance_y.to_i
+    false
   end
 end

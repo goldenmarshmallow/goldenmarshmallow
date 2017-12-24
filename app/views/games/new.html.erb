@@ -1,6 +1,12 @@
-<h1>New game form</h1>
-
-<%= simple_form_for @game do |f| %>
-  <%= f.input :name %>
-  <%= f.submit 'Create!' %>
-<% end %>
+<br />
+<div class='frosty col-10 offset-1'>
+  <h1 class='text-center'>Create A New Game</h1>
+  <br />
+  <%= simple_form_for @game do |f| %>
+    <%= f.input :name %>
+    <br />
+    <%= f.submit 'Create!', class: 'btn btn-success float-right' %>
+  <% end %>
+  <br />
+  <br />
+</div>

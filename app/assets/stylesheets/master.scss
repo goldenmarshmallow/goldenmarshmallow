@@ -1,47 +1,73 @@
 @import "bootstrap";
+@import "font-awesome";
 
 body {
-  background: image_url('chess_background.jpg') no-repeat center center fixed;
+  background: image_url('chess_background2.jpg') no-repeat center center fixed;
   -webkit-bakground-size: cover;
   -moz-background-size: cover;
   -o-background-size: cover;
   background-size: cover;
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif;
 }
 
-.title {
-  color: #bc5a45;
+.team-icon {
+  display: block;
+  max-height: 250px;
+  padding: 20px;
+  margin: auto;
+}
+
+.frosty {
+  -moz-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  -webkit-box-shadow: 1px 1px 2px 0 #d0d0d0;
+  box-shadow: 1px 1px 2px 0 #d0d0d0;
+  background: rgba(255, 255, 255, 0.5);
+  color: white;
+  border: 0.5px solid #ccc;
+  border: #e4e4e4 #bebebd #bebebd #e4e4e4;
+  padding: 10px;
+}
+
+.frosty h1 {
+  font-family: 'intro_rust_gbase_2_line', sans-serif;
+  font-weight: 100;
+  text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
+}
+
+.frosty h2 {
+  font-family: 'intro_rust_gbase_2_line', sans-serif;
+  font-weight: 200;
+  text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
+}
+
+.frosty h3 {
+  font-family: 'intro_rust_gbase_2_line', sans-serif;
+  font-weight: 200;
   text-shadow: rgba(0, 0, 0, 0.95) 1px 1px;
 }
 
 .navbar {
-  font-family: "Helvetica Neue", Helvetica;
+  font-family: 'kaushan_scriptregular', sans-serif;
   font-weight: 200;
   background: #fff;
+  box-shadow: 0px 1px 3px #2a2a2a;
+  position: relative;
+  max-height: 65px;
 }
 
-.navbar-light a.navbar-brand {
-  font-family: "Helvetica Neue", Helvetica;
-  font-weight: 100;
-  color: #233247;
-
+.navbar-inverse .navbar-brand {
+  font-family: 'intro_rust_gbase_2_line', sans-serif;
+  font-size: 30px;
+  margin-top: 15px;
+  color: #fbd38f;
 }
 
-.card{
-  background-color: #fff;
-  border-radius: .25rem;
-  box-shadow: 0 1px solid #e8e8e8;
-  border: 1px solid #e8e8e8;
-  margin-top: 40px;
-  padding: 0
+li {
+  margin-top: 20px;
 }
 
-.card p, .card .message{
-  font-size: 18px;
-  margin: 20px;
-}
-
-.card.form{
-  padding: 20px;
+.brand-img {
+  max-height: 45px;
 }
 
 tr, td {

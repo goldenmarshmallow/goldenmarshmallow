@@ -38,7 +38,7 @@ RSpec.describe Bishop, type: :model do
   end
 
   it 'will check if a bishop move from (2,4) to (5,7) is valid' do
-    bishop = FactoryBot.create(:bishop, x_position: 2, y_position: 4, color: :white, type: :bishop, game: game)
-    expect(bishop.valid_move?(5, 7)).to eq true
+    bishop = FactoryBot.create(:bishop, x_position: 0, y_position: 5, color: :white, type: :bishop, game: game)
+    expect(bishop.valid_move?(5, 0)).to eq true
   end
 end
