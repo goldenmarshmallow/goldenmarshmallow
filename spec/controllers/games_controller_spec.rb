@@ -73,5 +73,12 @@ RSpec.describe GamesController, type: :controller do
       get :show, params: { id: 'BLANK' }
       expect(response).to have_http_status(:not_found)
     end
+
+    it "should show user's gravatars" do
+      user = FactoryBot.create(:user)
+      sign_in user
+      get :show, params: { id: user.id }
+      expect(response).to have_http_status(:success)
+    end
   end
 end

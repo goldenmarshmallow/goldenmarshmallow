@@ -19,3 +19,15 @@
 </table>
 <br />
 <br />
+<table>
+  <tr>
+    <th>Avatar</th>
+    <th>Email</th>
+  </tr>
+  <% for user in @users %>
+    <tr>
+      <td><%= image_tag user.gravatar_url %></td>
+      <td><% user.email %></td>
+    </tr>
+  <% end %>
+</table>
