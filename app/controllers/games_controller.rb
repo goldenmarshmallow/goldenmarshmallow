@@ -23,6 +23,7 @@ class GamesController < ApplicationController
   def show
     @game = Game.find_by(id: params[:id])
     return render_not_found if @game.blank?
+    @users = Game.find_by(user_id: params[:id])
   end
 
   def update
