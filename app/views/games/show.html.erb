@@ -21,3 +21,13 @@
   <br />
   <br />
 </div>
+<table>
+  <tr>
+    <th>Avatar</th>
+    <th>Email</th>
+  </tr>
+  <tr>
+    <td><% image_tag avatar_url(@users) %></td>
+    <td><% @users.email %></td>
+  </tr>
+</table>
