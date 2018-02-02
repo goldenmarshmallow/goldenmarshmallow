@@ -20,6 +20,7 @@ gem 'travis'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
 gem 'font-awesome-rails'
+gem 'jquery-ui-rails'
 
 group :development do
   gem 'listen', '~> 3.0.5'
@@ -43,3 +44,4 @@ end
 source 'https://rails-assets.org' do
   gem 'rails-assets-tether', '>=1.3.3'
 end
+

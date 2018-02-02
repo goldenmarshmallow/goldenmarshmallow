@@ -1,5 +1,7 @@
 <br />
 <h1 class="text-center title"><%= current_game.name %></h1>
+
+
 <br />
 <table class="chess_table">
   <% 7.downto(0).each do |row_number| %>
@@ -18,5 +20,38 @@
   <% end %>
 </table>
 <br />
-<%= link_to 'Forfiet', forfeit_game_path, class: 'btn btn-danger', method: :PUT %>
+<%= link_to 'Forfiet', forfeit_game_path, data: {confirm: 'Are you sure you want to forfeit the game?'}, 
+class: 'btn btn-danger', method: :PUT %>
 <br />
+
+
+<script>
+$(document).ready(function () {
+<% if @game.result == "Forfeit"%>
+    $('#myModal').modal('show');
+<% end %>
+});
+</script>
+
+<!-- Modal -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Game Over!</h4>
+      </div>
+      <div class="modal-body">
+        Game Status: <%= @game.result %>
+        </br>
+        <% if @game.winner_id == 0 %>
+          Winner: <strong>"TIED GAME!"</strong>
+        <% else %>
+          Winner: <strong><%= @game.winner_id %></strong>
+        <% end %>
+      </div>
+      <div class="modal-footer">
+        <%= link_to 'Home', root_path, class: "btn btn-secondary" %>
+      </div>
+    </div>
+  </div>
+</div>
