@@ -81,10 +81,10 @@ RSpec.describe GamesController, type: :controller do
       black = FactoryBot.create(:user)
       sign_in white
       game = FactoryBot.create(:game)
-      game.update_attributes(white_player_id: white.id, black_player_id: black.id)
+      game.update(white_player_id: white.id, black_player_id: black.id)
       put :forfeit, params: { id: game.id }
 
-      expect(response).to redirect_to(games_path)
+      expect(response).to redirect_to game_path(Game.last)
     end
 
     it 'should show black player as winner if white player forfeits' do
@@ -92,10 +92,10 @@ RSpec.describe GamesController, type: :controller do
       black = FactoryBot.create(:user)
       sign_in white
       game = FactoryBot.create(:game)
-      game.update_attributes(white_player_id: white.id, black_player_id: black.id)
+      game.update(white_player_id: white.id, black_player_id: black.id)
       put :forfeit, params: { id: game.id }
 
-      expect(response).to redirect_to(games_path)
+      expect(response).to redirect_to game_path(Game.last)
     end
   end
 end

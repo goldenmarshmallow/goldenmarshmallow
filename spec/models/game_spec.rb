@@ -22,7 +22,7 @@ RSpec.describe Game, type: :model do
       black_player = FactoryBot.create(:user)
       game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
       game.forfeit(white_player)
-      game.update_attributes(winner_id: black_player.id)
+      game.update(winner_id: black_player.id)
       expect(game.winner_id).to eq black_player.id
     end
 
@@ -31,7 +31,7 @@ RSpec.describe Game, type: :model do
       black_player = FactoryBot.create(:user)
       game = FactoryBot.create(:game, white_player: white_player, black_player: black_player)
       game.forfeit(black_player)
-      game.update_attributes(winner_id: white_player.id)
+      game.update(winner_id: white_player.id)
       expect(game.winner_id).to eq white_player.id
     end
   end

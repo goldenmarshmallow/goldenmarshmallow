@@ -3,8 +3,8 @@ class Piece < ApplicationRecord
   validates :color, presence: true
   validates :type, presence: true
 
-  scope :white, ->() { where(color: 'white') }
-  scope :black, ->() { where(color: 'black') }
+  scope :white, -> { where(color: 'white') }
+  scope :black, -> { where(color: 'black') }
 
   def black?
     color == 'black'
@@ -18,8 +18,8 @@ class Piece < ApplicationRecord
     'piece'
   end
 
-  def exist?(x, y)
-    game.pieces.exists?(x_position: x, y_position: y)
+  def exist?(x_destination, y_destination)
+    game.pieces.exists?(x_position: x_destination, y_position: y_destination)
   end
 
   def obstructed?(destination_x, destination_y)
@@ -66,9 +66,9 @@ class Piece < ApplicationRecord
     if exist?(new_x, new_y)
       piece_at_destination = game.pieces.find_by(x_position: new_x, y_position: new_y)
       return 'destination occupied by piece of same color' if color == piece_at_destination.color
-      piece_at_destination.update_attributes(x_position: nil, y_position: nil)
+      piece_at_destination.update(x_position: nil, y_position: nil)
     end
-    update_attributes(x_position: new_x, y_position: new_y)
+    update(x_position: new_x, y_position: new_y)
   end
 
   def valid_move?(_destination_x, _destination_y)

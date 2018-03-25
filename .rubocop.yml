@@ -19,7 +19,7 @@ Style/Documentation:
   Enabled: false
 
 Style/FileName:
-    Enabled: false
+  Enabled: false
 
 # Disables "Use nested module/class definitions instead of compact style" warning
 ClassAndModuleChildren:

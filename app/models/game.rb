@@ -1,10 +1,10 @@
 class Game < ApplicationRecord
   validates :name, presence: true
   belongs_to :user
-  has_many :pieces
-  belongs_to :white_player, class_name: 'User', optional: true
-  belongs_to :black_player, class_name: 'User', optional: true
-  belongs_to :winner, class_name: 'User', optional: true
+  has_many :pieces, dependent: :destroy
+  belongs_to :white_player, inverse_of: :games, class_name: 'User', optional: true
+  belongs_to :black_player, inverse_of: :games, class_name: 'User', optional: true
+  belongs_to :winner, inverse_of: :games, class_name: 'User', optional: true
 
   def populate_board
     (0..7).each do |i|
@@ -56,11 +56,11 @@ class Game < ApplicationRecord
   end
 
   def forfeit(current_user)
-    update_attributes(winner_id: white_player_id, result: 'Forfeit') if current_user == black_player
+    update(winner_id: white_player_id, result: 'Forfeit') if current_user == black_player
 
-    update_attributes(winner_id: black_player_id, result: 'Forfeit') if current_user == white_player
+    update(winner_id: black_player_id, result: 'Forfeit') if current_user == white_player
   end
-  
+
   def check?
     # call the last
     last_move = pieces.last

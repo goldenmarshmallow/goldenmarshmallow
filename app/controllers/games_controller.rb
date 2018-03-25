@@ -12,7 +12,7 @@ class GamesController < ApplicationController
   def create
     @game = current_user.games.create(game_params)
     if @game.valid?
-      @game.update_attributes(white_player_id: @game.user_id)
+      @game.update(white_player_id: @game.user_id)
       redirect_to game_path(@game)
       @game.populate_board
     else
@@ -29,7 +29,7 @@ class GamesController < ApplicationController
     @game = Game.find_by(id: params[:id])
     return render_not_found if @game.blank?
     if @game.valid?
-      @game.update_attributes(black_player_id: current_user.id)
+      @game.update(black_player_id: current_user.id)
       redirect_to game_path(@game)
     else
       render :index, status: :unprocessable_entity
@@ -39,8 +39,7 @@ class GamesController < ApplicationController
   def forfeit
     @game = Game.find_by(id: params[:id])
     @game.forfeit(current_user)
-    flash[:alert] = 'You have forfeited the game.'
-    redirect_to games_path
+    redirect_to game_path(@game), alert: 'You have forfeited the game.'
   end
 
   private
