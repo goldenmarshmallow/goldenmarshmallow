@@ -74,4 +74,28 @@ RSpec.describe GamesController, type: :controller do
       expect(response).to have_http_status(:not_found)
     end
   end
+
+  describe 'games#forfeit action' do
+    it 'should show white player as winner if black player forfeits' do
+      white = FactoryBot.create(:user)
+      black = FactoryBot.create(:user)
+      sign_in white
+      game = FactoryBot.create(:game)
+      game.update_attributes(white_player_id: white.id, black_player_id: black.id)
+      put :forfeit, params: { id: game.id }
+
+      expect(response).to redirect_to(games_path)
+    end
+
+    it 'should show black player as winner if white player forfeits' do
+      white = FactoryBot.create(:user)
+      black = FactoryBot.create(:user)
+      sign_in white
+      game = FactoryBot.create(:game)
+      game.update_attributes(white_player_id: white.id, black_player_id: black.id)
+      put :forfeit, params: { id: game.id }
+
+      expect(response).to redirect_to(games_path)
+    end
+  end
 end

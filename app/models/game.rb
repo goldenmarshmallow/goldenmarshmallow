@@ -2,6 +2,9 @@ class Game < ApplicationRecord
   validates :name, presence: true
   belongs_to :user
   has_many :pieces
+  belongs_to :white_player, class_name: 'User', optional: true
+  belongs_to :black_player, class_name: 'User', optional: true
+  belongs_to :winner, class_name: 'User', optional: true
 
   def populate_board
     (0..7).each do |i|
@@ -52,6 +55,12 @@ class Game < ApplicationRecord
     where('white_player_id IS NULL OR black_player_id IS NULL')
   end
 
+  def forfeit(current_user)
+    update_attributes(winner_id: white_player_id, result: 'Forfeit') if current_user == black_player
+
+    update_attributes(winner_id: black_player_id, result: 'Forfeit') if current_user == white_player
+  end
+  
   def check?
     # call the last
     last_move = pieces.last
