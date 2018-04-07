@@ -26,9 +26,12 @@
 
 <script>
 $(document).ready(function () {
-<% if @game.result == "Forfeit"%>
+  $(.black_space, .white_space).droppable();
+  $(.piece).draggable();
+  
+  <% if @game.result == "Forfeit"%>
     $('#myModal').modal('show');
-<% end %>
+  <% end %>
 });
 </script>
 
