@@ -25,10 +25,20 @@
 </div>
 
 <script>
-$(document).ready(function () {
-<% if @game.result == "Forfeit"%>
+$(document).ready(function() {
+  $(".black_space", ".white_space").droppable({
+    tolerance: "fit",
+    accept: ".piece"
+  });
+
+  $(".piece").draggable({
+    containment: ".black_space, .white_space",
+    revert: false
+  });
+
+  <% if @game.result == "Forfeit"%>
     $('#myModal').modal('show');
-<% end %>
+  <% end %>
 });
 </script>
 
